@@ -2,7 +2,10 @@ const express = require("express");
 const cors = require("cors")
 const { decisionTreeController } = require("./controllers/decisionTree");
 const { randomForestController } = require("./controllers/randomForest");
-const { linearReggressionController } = require("./controllers/linearRegression");
+const { logisiticRegressionController } = require("./controllers/logisticRegression");
+const { passwordResemblanceController } = require("./controllers/similarityController");
+
+
 
 const app = express();
 app.use(express.json());
@@ -11,11 +14,14 @@ app.use(cors())
 
 
 
-app.post("/check/regression" , linearReggressionController)
+app.post("/check/regression" , logisiticRegressionController)
 
 app.post("/check/decision" , decisionTreeController)
 
 app.post("/check/randomForest" , randomForestController)
+
+
+app.post("/check/similarity" , passwordResemblanceController)
 
 
 
