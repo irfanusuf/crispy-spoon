@@ -17,7 +17,7 @@ const passwordResemblanceController = async (req, res) => {
 
     if (password.length < 8) {
       return res.json({
-        score: 1,
+        // score: 1,
         message: "Password length less than 8",
       });
     }
@@ -25,7 +25,7 @@ const passwordResemblanceController = async (req, res) => {
 
     console.log("similarity count : " + `${similarityCount}`);
 
-    if (similarityCount > 0) {
+    if (similarityCount > 0 ) {
       similarityCount = 0;
       return res.json({
         score: 1,
