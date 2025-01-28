@@ -4,6 +4,8 @@ const { decisionTreeController } = require("./controllers/decisionTree");
 const { randomForestController } = require("./controllers/randomForest");
 const { logisiticRegressionController } = require("./controllers/logisticRegression");
 const { passwordResemblanceController } = require("./controllers/similarityController");
+const { connectDB } = require("./config/dbConnect");
+const { registerHandler } = require("./controllers/userController");
 
 
 
@@ -12,8 +14,10 @@ app.use(express.json());
 app.use(cors())
 
 
+connectDB()
 
 
+app.post ("/user/register" , registerHandler)
 app.post("/check/regression" , logisiticRegressionController)
 
 app.post("/check/decision" , decisionTreeController)
