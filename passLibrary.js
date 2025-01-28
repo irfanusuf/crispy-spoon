@@ -4,10 +4,13 @@ const commonPasswords = {
     "qwerty123",
     "password12345",
     "welcome12345",
+    "User@1234",
     "admin1",
     "admin123@",
     "Admin123@",
     "Admin@123",
+    "Admin@1234",
+    "admin@1234",
     "qwerty!@#",
     "iloveyou1234",
     "123password123",
@@ -291,6 +294,7 @@ const commonPasswords = {
     "qwerty!hello123",
     "123qwerty12!",
     "password1234qwerty",
+    "thisisRANDOM@sTRONGPassWord!"
   ],
 };
 
