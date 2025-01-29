@@ -1,14 +1,13 @@
+
 const { commonPasswords } = require("../passLibrary"); 
 
-let similarityCount;
-
 function getSimilarity(password, commonPasswords) {
-  commonPasswords.forEach((commonPassword) => {
-    if (password === commonPassword) {
-      return (similarityCount = 1);
-    }
-  });
+  if (commonPasswords.includes(password)) {
+    return 1; 
+  }
+  return 0; 
 }
+
 const passwordResemblanceController = async (req, res) => {
   try {
     const { password } = req.body;
@@ -17,20 +16,18 @@ const passwordResemblanceController = async (req, res) => {
 
     if (password.length < 8) {
       return res.json({
-        // score: 1,
         message: "Password length less than 8",
       });
     }
-    getSimilarity(password, commonPasswords.passwords);
 
-    console.log("similarity count : " + `${similarityCount}`);
+    const similarityCount = getSimilarity(password, commonPasswords.passwords);
 
-    if (similarityCount > 0 ) {
-      similarityCount = 0;
+    console.log("similarity count: " + similarityCount);
+
+    if (similarityCount > 0) {
       return res.json({
         score: 1,
-        message:
-          "Common password detected. Please choose a more secure password.",
+        message: "Common password detected. Please choose a more secure password.",
       });
     } else {
       return res.json({

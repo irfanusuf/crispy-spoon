@@ -23,7 +23,7 @@ const registerHandler = async (req, res) => {
     if (newUser) {
       res.json({
         success: true,
-        message: "User Created!",
+        message: "Email Stored. kindly proceed!",
       });
     } else {
       res.json({
@@ -45,15 +45,11 @@ const registerPassHandler = async (req, res) => {
     const { email } = req.query;
     const { password } = req.body;
 
-    if (email === "" || password === "") {
-      return res.json({
-        success: false,
-        message: "feilds missing",
-      });
-    }
 
     const user = await User.findOne({ email });
+
     const passcrypt = await bcrypt.hash(password, 10);
+
 
     if (user) {
       user.password = passcrypt;
@@ -65,7 +61,7 @@ const registerPassHandler = async (req, res) => {
     } else {
       return res.json({
         success: false,
-        message: "Some Error",
+        message: "Password Check Succesfull",
       });
     }
   } catch (error) {

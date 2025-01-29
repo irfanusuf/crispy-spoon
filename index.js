@@ -17,6 +17,8 @@ app.use(cors())
 
 connectDB()
 
+
+
 app.post ("/user/register" , registerHandler)
 
 app.post("/user/registerPassword" , registerPassHandler)
