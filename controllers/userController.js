@@ -1,5 +1,6 @@
 const { User } = require("../models/userModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 
 const registerHandler = async (req, res) => {
   try {
@@ -76,6 +77,7 @@ const registerPassHandler = async (req, res) => {
 const loginHandler = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const SECRET_KEY = "hithsudanxygniyg$%^&"
 
     if (email === "" || password === "") {
       return res.json({
@@ -100,7 +102,19 @@ const loginHandler = async (req, res) => {
       });
     }
 
+   const userId = user._id
     if (await bcrypt.compare(password, user.password)) {
+
+
+      const token = jwt.sign({ userId }, SECRET_KEY, { expiresIn: "15m" });
+
+      res.cookie("authToken", token, {
+        httpOnly: true,   
+        secure: true,     
+        maxAge: 15 * 60 * 1000, 
+        sameSite: "Strict", 
+      });
+
       return res.json({
         success: true,
         message: "Login Succesfull!",

@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors")
+const cookieParser = require("cookie-parser");
 const { decisionTreeController } = require("./controllers/decisionTree");
 const { randomForestController } = require("./controllers/randomForest");
 const { logisiticRegressionController } = require("./controllers/logisticRegression");
@@ -8,16 +9,21 @@ const { registerHandler, registerPassHandler, loginHandler, getAllUSerHandler } 
 
 
 const { connectDB } = require("./config/dbConnect");
+const { IsAuthorised, getAuthenticated } = require("./middleware/IsAuthorised");
+
 
 
 const app = express();
+app.use(cookieParser());
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+  // origin: "http://localhost:3000", 
+  origin: "https://infinity-guide.vercel.app", 
+  credentials: true, 
+}))
 
 
 connectDB()
-
-
 
 app.post ("/user/register" , registerHandler)
 
@@ -25,7 +31,9 @@ app.post("/user/registerPassword" , registerPassHandler)
 
 app.post("/user/login" , loginHandler)
 
-app.get("/users/all" , getAllUSerHandler)
+app.get("/users/all" , IsAuthorised , getAllUSerHandler)
+
+app.get("/get-authenticated" , getAuthenticated)
 
 app.post("/check/regression" , logisiticRegressionController)
 
