@@ -112,7 +112,7 @@ const loginHandler = async (req, res) => {
         httpOnly: true,   
         secure: true,     
         maxAge: 15 * 60 * 1000, 
-        sameSite: "Strict", 
+        sameSite: "Lax", 
       });
 
       return res.json({
