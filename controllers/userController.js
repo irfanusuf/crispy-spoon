@@ -118,6 +118,7 @@ const loginHandler = async (req, res) => {
       return res.json({
         success: true,
         message: "Login Succesfull!",
+        token : token
       });
     } else {
       return res.json({

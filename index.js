@@ -16,11 +16,7 @@ const { IsAuthorised, getAuthenticated } = require("./middleware/IsAuthorised");
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors({
-  // origin: "http://localhost:3000", 
-  origin: "https://infinity-guide.vercel.app", 
-  credentials: true, 
-}))
+app.use(cors())
 
 
 connectDB()

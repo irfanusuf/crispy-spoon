@@ -6,7 +6,8 @@ const { User } = require("../models/userModel");
 
 
 const IsAuthorised=  (req, res , next) => {
-    const token = req.cookies.authToken;
+    // const token = req.cookies.authToken;
+    const token = req.query.token
     const SECRET_KEY = "hithsudanxygniyg$%^&"
     
   
@@ -25,8 +26,11 @@ const IsAuthorised=  (req, res , next) => {
 
 
  
-  const getAuthenticated=  async (req, res , next) => {
-    const token = req.cookies.authToken;
+  const getAuthenticated  =  async (req, res , next) => {
+    // const token = req.cookies.authToken;
+    const token = req.query.token
+
+  
     const SECRET_KEY = "hithsudanxygniyg$%^&"
     
   
@@ -42,6 +46,7 @@ const IsAuthorised=  (req, res , next) => {
       res.json({success : true , email  : user.email})
  
     } catch (err) {
+      console.log(err)
       res.status(403).json({success : false});
     }
   };
